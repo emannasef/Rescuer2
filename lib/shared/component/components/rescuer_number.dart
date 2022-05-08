@@ -34,9 +34,9 @@ class _RescuerNumberState extends State<RescuerNumber> {
             onInputChanged: (PhoneNumber number) {
               print(number.phoneNumber);
             },
-            onInputValidated: (bool value) {
-              print(value);
-            },
+            // onInputValidated: (bool value) {
+            //   print(value);
+            // },
             selectorConfig: const SelectorConfig(
               selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
             ),

@@ -27,6 +27,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
   dynamic postUserType;
@@ -47,14 +48,15 @@ class _SignUpState extends State<SignUp> {
       postUserType = "2";
       uiType = false;
     }
-
+    String ere = "$birthDateInString+T18:51:48.059Z";
     Api().post(url: 'Authentication/Register', body: {
       "UserName": userNameController.text,
       "Email": emailController.text,
       "Password": passwordController.text,
-      "BirthDate": "2022-05-04T11:39:00.301Z", //birthDateInString,
+      "BirthDate": "2022-05-08T18:51:48.059Z",
       "MobileNumber": phoneController.text,
       "RescuerMobileNumber": rescuerPhoneController.text,
+      "Address": addressController.text,
       "Gender": postGender,
       "UserTypeId": postUserType,
     });
@@ -205,6 +207,20 @@ class _SignUpState extends State<SignUp> {
                         },
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    controller: addressController,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        border: InputBorder.none,
+                        labelText: 'Address',
+                        prefixIcon: Icon(
+                          Icons.location_city_outlined,
+                          color: Color(0xff22c0e1),
+                        )),
                   ),
                   const SizedBox(
                     height: 20.0,
