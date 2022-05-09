@@ -13,7 +13,7 @@ class Api {
 
     if (token != null) {
       headers.addAll({
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer$token',
       });
     }
 

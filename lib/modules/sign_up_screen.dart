@@ -6,6 +6,7 @@ import '../shared/component/components/custom_button.dart';
 import '../shared/component/components/gender_button.dart';
 import '../shared/component/components/rescuer_number.dart';
 import '../shared/component/components/terms_of_use.dart';
+import 'package:date_format/date_format.dart';
 
 bool isSelected1 = false;
 bool isSelected2 = false;
@@ -48,12 +49,17 @@ class _SignUpState extends State<SignUp> {
       postUserType = "2";
       uiType = false;
     }
-    String ere = "$birthDateInString+T18:51:48.059Z";
+
+    String rr = formatDate(
+        DateTime(birthDate!.year.toInt(), birthDate!.month.toInt(),
+            birthDate!.day.toInt()),
+        [yyyy, '-', mm, '-', dd]);
+
     Api().post(url: 'Authentication/Register', body: {
       "UserName": userNameController.text,
       "Email": emailController.text,
       "Password": passwordController.text,
-      "BirthDate": "2022-05-08T18:51:48.059Z",
+      "BirthDate": rr + "T18:51:48.059Z",
       "MobileNumber": phoneController.text,
       "RescuerMobileNumber": rescuerPhoneController.text,
       "Address": addressController.text,
@@ -67,7 +73,7 @@ class _SignUpState extends State<SignUp> {
     return SafeArea(
       child: Scaffold(
         body: Form(
-          autovalidateMode: AutovalidateMode.always,
+          autovalidateMode: AutovalidateMode.disabled,
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
@@ -101,6 +107,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextFormField(
                     controller: phoneController,
+                    maxLength: 11,
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
                         filled: true,
@@ -126,12 +133,12 @@ class _SignUpState extends State<SignUp> {
                         color: Color(0xff22c0e1),
                       ),
                     ),
-                    // validator: (String? value) {
-                    //   if (value!.isEmpty) {
-                    //     return 'Email Can\'t be blank';
-                    //   }
-                    //   return null;
-                    // },
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'Email Can\'t be blank';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -139,12 +146,12 @@ class _SignUpState extends State<SignUp> {
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
                     controller: passwordController,
-                    // validator: (String? value) {
-                    //   if (value!.isEmpty) {
-                    //     return 'You Should Enter Your Password';
-                    //   }
-                    //   return null;
-                    // },
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'You Should Enter Your Password';
+                      }
+                      return null;
+                    },
                     obscureText: hidePassword,
                     decoration: InputDecoration(
                       filled: true,
@@ -175,15 +182,15 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextFormField(
                     obscureText: confirmPassword,
-                    // validator: (String? value) {
-                    //   if (value!.isEmpty) {
-                    //     return 'You should confirm your password';
-                    //   }
-                    //   if (value != passwordController.text) {
-                    //     return 'not matches';
-                    //   }
-                    //   return null;
-                    // },
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'You should confirm your password';
+                      }
+                      if (value != passwordController.text) {
+                        return 'not matches';
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       filled: true,
                       border: InputBorder.none,
@@ -310,8 +317,6 @@ class _SignUpState extends State<SignUp> {
                     title: 'Sign Up',
                     onPress: () async {
                       await register();
-                      // if (_formKey.currentState!.validate()) {
-                      // }
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -321,6 +326,9 @@ class _SignUpState extends State<SignUp> {
                         ),
                       );
                       setState(() {});
+                      // if (_formKey.currentState!.validate()) {
+                      //   setState(() {});
+                      // }
                     },
                     textColor: Colors.white,
                     bkColor: const Color(0xff22c0e1),

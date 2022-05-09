@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String? birthDateInString;
+DateTime? birthDate;
 
 class BirthDate extends StatefulWidget {
   const BirthDate({Key? key}) : super(key: key);
@@ -10,8 +10,8 @@ class BirthDate extends StatefulWidget {
 }
 
 class _BirthDateState extends State<BirthDate> {
-  DateTime? birthDate;
-  // String? birthDateInString;
+  //DateTime? birthDate;
+  String? birthDateInString;
   bool isDateSelected = false;
 
   @override
