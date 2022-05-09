@@ -50,7 +50,7 @@ class _SignUpState extends State<SignUp> {
       uiType = false;
     }
 
-    String rr = formatDate(
+    String postBirthDate = formatDate(
         DateTime(birthDate!.year.toInt(), birthDate!.month.toInt(),
             birthDate!.day.toInt()),
         [yyyy, '-', mm, '-', dd]);
@@ -59,7 +59,7 @@ class _SignUpState extends State<SignUp> {
       "UserName": userNameController.text,
       "Email": emailController.text,
       "Password": passwordController.text,
-      "BirthDate": rr + "T18:51:48.059Z",
+      "BirthDate": postBirthDate + "T18:51:48.059Z",
       "MobileNumber": phoneController.text,
       "RescuerMobileNumber": rescuerPhoneController.text,
       "Address": addressController.text,
